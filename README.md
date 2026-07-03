@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Decerno — spletna stran
 
-## Getting Started
+Marketinška stran agencije Decerno. Next.js 14 (App Router) + TypeScript + Tailwind CSS.
 
-First, run the development server:
+## Zagon lokalno
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Stran je nato na voljo na [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Objava na Vercel
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Potisni repozitorij na GitHub.
+2. Na [vercel.com](https://vercel.com) izberi **Add New → Project** in poveži repozitorij.
+3. Vercel samodejno zazna Next.js — brez dodatnih nastavitev klikni **Deploy**.
 
-## Learn More
+Za lastno domeno: v Vercelu **Settings → Domains** in po registraciji domene posodobi `site.url` v `content/site.ts`.
 
-To learn more about Next.js, take a look at the following resources:
+## Kje se kaj ureja
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Kaj | Kje |
+| --- | --- |
+| **Vsa besedila (slovenska)** | `content/site.ts` — vse strani berejo besedilo od tu |
+| **Barve** | `tailwind.config.ts` (`theme.extend.colors`) |
+| **Pisave** | `app/layout.tsx` (`next/font` — Space Grotesk + Inter) |
+| **Logo** | `components/Navbar.tsx` in `components/Footer.tsx` (trenutno besedilni logo) |
+| **E-naslov, družbena omrežja** | `content/site.ts` (`site.email`, `site.socials`) — označeno s `PLACEHOLDER` |
+| **Reference / študije primerov** | `content/site.ts` (`references.cases`) — zamenjaj placeholder kartice |
+| **Kontaktni obrazec → e-pošta/CRM** | `app/api/contact/route.ts` — glej `TODO` komentar (Resend, EmailJS …) |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Struktura
 
-## Deploy on Vercel
+```
+app/            strani (App Router) + API ruta za kontakt + sitemap/robots
+components/     Navbar, Footer, Hero, ServiceCard, ContactForm …
+content/site.ts centralizirana vsebina — besedilo urejaj tukaj
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Iskanje placeholderjev
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Vse, kar potrebuje prave podatke, je označeno v kodi:
+
+```bash
+grep -rn "PLACEHOLDER" app components content
+```

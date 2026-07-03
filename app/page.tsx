@@ -1,101 +1,214 @@
-import Image from "next/image";
+import Link from "next/link";
+import { ArrowRight, ShieldCheck, Timer, Puzzle, BadgeCheck } from "lucide-react";
+import Hero from "@/components/Hero";
+import Reveal from "@/components/Reveal";
+import SectionHeading from "@/components/SectionHeading";
+import ServiceCard from "@/components/ServiceCard";
+import AutomationDiagram from "@/components/AutomationDiagram";
+import FounderCard from "@/components/FounderCard";
+import CTASection from "@/components/CTASection";
+import {
+  statsStrip,
+  trustStrip,
+  howItWorks,
+  homeProcess,
+  servicesPreview,
+  services,
+  objections,
+  about,
+  teamSection,
+} from "@/content/site";
 
-export default function Home() {
+const objectionIcons = [ShieldCheck, Timer, Puzzle, BadgeCheck];
+
+export default function HomePage() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <>
+      <Hero />
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      {/* Trak z dejstvi */}
+      <section>
+        <div className="mx-auto max-w-content px-5 pt-6 sm:px-8">
+          <Reveal>
+            <dl className="grid grid-cols-2 gap-8 py-10 md:grid-cols-4">
+              {statsStrip.map((stat) => (
+                <div key={stat.label}>
+                  <dt className="sr-only">{stat.label}</dt>
+                  <dd className="font-display text-3xl font-bold tracking-tight text-body">
+                    {stat.value}
+                  </dd>
+                  <p className="mt-1.5 max-w-[13rem] font-display text-[11px] font-semibold uppercase leading-relaxed tracking-[0.14em] text-muted">
+                    {stat.label}
+                  </p>
+                </div>
+              ))}
+            </dl>
+          </Reveal>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </section>
+
+      {/* Kako deluje: besedilo / diagram / koraki */}
+      <section id={howItWorks.id} className="scroll-mt-24 bg-white/60">
+        <div className="mx-auto max-w-content px-5 py-20 sm:px-8 sm:py-28">
+          <Reveal>
+            <div className="text-center">
+              <SectionHeading
+                eyebrow={howItWorks.eyebrow}
+                title={howItWorks.title}
+                className="[&>h2]:mx-auto"
+              />
+            </div>
+          </Reveal>
+
+          <div className="mt-14 grid items-center gap-10 lg:grid-cols-[1fr_1.15fr_1fr]">
+            <Reveal>
+              <div>
+                <p className="text-base text-muted">{homeProcess.intro}</p>
+                <Link
+                  href={homeProcess.button.href}
+                  className="mt-7 inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 text-sm font-semibold text-white transition-[transform,background-color] hover:bg-ink-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary active:scale-[0.97]"
+                >
+                  {homeProcess.button.label}
+                  <ArrowRight size={16} />
+                </Link>
+              </div>
+            </Reveal>
+
+            <Reveal delay={150}>
+              <AutomationDiagram vertical />
+            </Reveal>
+
+            <Reveal delay={250}>
+              <ol className="space-y-7">
+                {howItWorks.steps.map((step, i) => (
+                  <li key={step.name} className="group">
+                    <div className="flex items-baseline gap-3">
+                      <span className="font-display text-sm font-bold text-primary">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <h3 className="text-lg font-bold text-body transition-colors group-hover:text-primary">
+                        {step.name}
+                      </h3>
+                    </div>
+                    <p className="mt-1.5 border-l border-body/10 pl-[2.3rem] text-sm text-muted">
+                      {step.description}
+                    </p>
+                  </li>
+                ))}
+              </ol>
+            </Reveal>
+          </div>
+
+          {/* Trak zaupanja — PLACEHOLDER: logotipi strank pridejo v content/site.ts */}
+          <Reveal>
+            <p className="mt-16 border-t border-body/5 pt-8 text-center text-sm font-medium text-muted">
+              {trustStrip.text}
+            </p>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Storitve — temna sekcija */}
+      <section className="bg-ink">
+        <div className="mx-auto max-w-content px-5 py-20 sm:px-8 sm:py-28">
+          <Reveal>
+            <div className="flex flex-wrap items-end justify-between gap-6">
+              <div>
+                <SectionHeading
+                  eyebrow={servicesPreview.eyebrow}
+                  title={servicesPreview.title}
+                  dark
+                />
+                <p className="mt-4 max-w-xl text-base text-mutedark">
+                  {servicesPreview.intro}
+                </p>
+              </div>
+              <Link
+                href={servicesPreview.linkHref}
+                className="inline-flex items-center gap-2 rounded-full border border-white/20 px-5 py-2.5 text-sm font-semibold text-bodylight transition-[transform,background-color,border-color] hover:border-primary-glow hover:bg-white/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-glow active:scale-[0.97]"
+              >
+                {servicesPreview.linkLabel}
+                <ArrowRight size={16} />
+              </Link>
+            </div>
+          </Reveal>
+          <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {services.map((service, i) => (
+              <Reveal key={service.slug} delay={i * 100}>
+                <ServiceCard service={service} dark />
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Zakaj Decerno — svetla sekcija s štirimi karticami */}
+      <section>
+        <div className="mx-auto max-w-content px-5 py-20 sm:px-8 sm:py-28">
+          <Reveal>
+            <div className="flex flex-wrap items-end justify-between gap-6">
+              <SectionHeading eyebrow={objections.eyebrow} title={objections.title} />
+            </div>
+          </Reveal>
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {objections.items.map((item, i) => {
+              const Icon = objectionIcons[i % objectionIcons.length];
+              return (
+                <Reveal key={item.title} delay={i * 100}>
+                  <div className="h-full rounded-2xl border border-body/5 bg-white p-7 shadow-card transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-card-hover">
+                    <span className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-full bg-ink text-white">
+                      <Icon size={19} strokeWidth={1.8} />
+                    </span>
+                    <h3 className="text-base font-bold text-body">{item.title}</h3>
+                    <p className="mt-2 text-sm text-muted">{item.description}</p>
+                  </div>
+                </Reveal>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Ekipa — temna sekcija */}
+      <section className="bg-ink">
+        <div className="mx-auto max-w-content px-5 py-20 sm:px-8 sm:py-28">
+          <Reveal>
+            <div className="flex flex-wrap items-end justify-between gap-6">
+              <div>
+                <SectionHeading
+                  eyebrow={teamSection.eyebrow}
+                  title={teamSection.title}
+                  dark
+                />
+                <p className="mt-4 max-w-xl text-base text-mutedark">
+                  {teamSection.text}
+                </p>
+              </div>
+              <Link
+                href={teamSection.button.href}
+                className="inline-flex items-center gap-2 rounded-full border border-white/20 px-5 py-2.5 text-sm font-semibold text-bodylight transition-[transform,background-color,border-color] hover:border-primary-glow hover:bg-white/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-glow active:scale-[0.97]"
+              >
+                {teamSection.button.label}
+                <ArrowRight size={16} />
+              </Link>
+            </div>
+          </Reveal>
+          <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {about.founders.map((founder, i) => (
+              <Reveal key={founder.name} delay={i * 120}>
+                <FounderCard {...founder} />
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <CTASection
+        title={about.cta.title}
+        description={about.cta.description}
+        buttonLabel={about.cta.button.label}
+        buttonHref={about.cta.button.href}
+      />
+    </>
   );
 }

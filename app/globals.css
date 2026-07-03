@@ -3,25 +3,195 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  color-scheme: light;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  @apply bg-cream text-body font-sans antialiased;
+  line-height: 1.7;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+h1,
+h2,
+h3,
+h4 {
+  @apply font-display;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+::selection {
+  background-color: #4f46e5;
+  color: #fafaf8;
+}
+
+/* Scroll reveal — Reveal.tsx doda .is-visible, ko element pride v vidno polje */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Utrip, ki potuje po povezavah avtomatizacijskega diagrama v heroju */
+/* Lebdeči stekleni elementi v ozadju heroja */
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translateY(0) rotate(var(--r, 0deg));
+  }
+  50% {
+    transform: translateY(-16px) rotate(calc(var(--r, 0deg) + 4deg));
+  }
+}
+
+.float-slow {
+  animation: float-slow 9s ease-in-out infinite;
+}
+
+.float-slower {
+  animation: float-slow 14s ease-in-out infinite;
+}
+
+/* Parallax ob drsenju — samo v brskalnikih s scroll-driven animacijami */
+@supports (animation-timeline: scroll()) {
+  @keyframes hero-drift {
+    to {
+      transform: translateY(90px);
+    }
+  }
+  .hero-drift {
+    animation: hero-drift linear both;
+    animation-timeline: scroll();
+    animation-range: 0 700px;
+  }
+}
+
+/* Tekoči trak v heroju: premikajoče se proge */
+@keyframes belt-move {
+  to {
+    background-position: 28px 0;
+  }
+}
+
+.belt-track {
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgba(245, 245, 244, 0.14) 0 3px,
+    transparent 3px 28px
+  );
+  animation: belt-move 0.9s linear infinite;
+}
+
+/* Robotki: pokukajo iz stroja, se peljejo po traku in padejo z njega */
+.robot-lane {
+  container-type: inline-size;
+}
+
+@keyframes robot-run {
+  0% {
+    transform: translateX(0) translateY(4px) scale(0.5);
+    opacity: 0;
+  }
+  10% {
+    transform: translateX(6cqw) translateY(0) scale(1);
+    opacity: 1;
+  }
+  80% {
+    transform: translateX(78cqw) translateY(0) scale(1);
+    opacity: 1;
+  }
+  92% {
+    transform: translateX(86cqw) translateY(22px) rotate(16deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(89cqw) translateY(64px) rotate(28deg);
+    opacity: 0;
+  }
+}
+
+.robot-anim {
+  animation: robot-run 7s cubic-bezier(0.3, 0, 0.7, 1) infinite;
+  opacity: 0;
+}
+
+/* Utripajoča statusna lučka na stroju */
+@keyframes machine-light {
+  0%,
+  100% {
+    opacity: 0.35;
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+  }
+  50% {
+    opacity: 1;
+    box-shadow: 0 0 10px 2px rgba(16, 185, 129, 0.5);
+  }
+}
+
+.machine-light {
+  animation: machine-light 1.8s ease-in-out infinite;
+}
+
+/* Vsaka pika prepotuje svoj odsek v tretjini cikla — utrip potuje od vozlišča do vozlišča */
+@keyframes connector-x {
+  0% {
+    transform: translateX(0);
+    opacity: 0;
+  }
+  4% {
+    opacity: 1;
+  }
+  29% {
+    opacity: 1;
+  }
+  33.3% {
+    transform: translateX(calc(100cqw - 6px));
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(calc(100cqw - 6px));
+    opacity: 0;
+  }
+}
+
+.connector {
+  container-type: inline-size;
+}
+
+.connector-dot {
+  animation: connector-x 1.4s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .connector-dot {
+    animation: none;
+    opacity: 0;
+  }
+  /* Brez animacij: en robotek stoji na sredini traku, ostala dva sta skrita */
+  .robot-anim {
+    animation: none;
+    opacity: 1;
+    transform: translateX(40cqw);
+  }
+  .robot-anim:not(:first-child) {
+    display: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
   }
 }
