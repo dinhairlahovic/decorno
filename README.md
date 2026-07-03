@@ -11,6 +11,23 @@ npm run dev
 
 Stran je nato na voljo na [http://localhost:3000](http://localhost:3000).
 
+## Kontaktni obrazec (pošiljanje e-pošte)
+
+Obrazec pošlje povpraševanje na `decernoai@gmail.com` prek [Resend](https://resend.com). Za delovanje potrebuješ API ključ:
+
+1. Registriraj se na [resend.com](https://resend.com) z naslovom **decernoai@gmail.com**.
+2. **API Keys → Create API Key**, kopiraj ključ (`re_…`).
+3. **Lokalno:** skopiraj `.env.example` v `.env.local` in vpiši ključ:
+   ```bash
+   cp .env.example .env.local
+   # nato v .env.local: RESEND_API_KEY=re_...
+   ```
+4. **Na Vercel:** projekt → **Settings → Environment Variables** → dodaj `RESEND_API_KEY` (za Production) in ponovno deployaj.
+
+Brez verificirane domene Resend dostavlja samo na e-naslov, s katerim je registriran račun — zato mora to biti `decernoai@gmail.com`. Za pošiljanje z lastne domene (npr. `kontakt@decerno.si`) verificiraj domeno v Resend in posodobi polje `from` v `app/api/contact/route.ts`.
+
+> Če `RESEND_API_KEY` ni nastavljen, obrazec še vedno deluje, a e-pošta se ne pošlje — povpraševanje se le zabeleži v strežniški dnevnik.
+
 ## Objava na Vercel
 
 1. Potisni repozitorij na GitHub.
@@ -29,7 +46,7 @@ Za lastno domeno: v Vercelu **Settings → Domains** in po registraciji domene p
 | **Logo** | `components/Navbar.tsx` in `components/Footer.tsx` (trenutno besedilni logo) |
 | **E-naslov, družbena omrežja** | `content/site.ts` (`site.email`, `site.socials`) — označeno s `PLACEHOLDER` |
 | **Reference / študije primerov** | `content/site.ts` (`references.cases`) — zamenjaj placeholder kartice |
-| **Kontaktni obrazec → e-pošta/CRM** | `app/api/contact/route.ts` — glej `TODO` komentar (Resend, EmailJS …) |
+| **Kontaktni obrazec → e-pošta** | `app/api/contact/route.ts` (pošiljanje prek Resend) + `RESEND_API_KEY` — glej razdelek zgoraj |
 
 ## Struktura
 
