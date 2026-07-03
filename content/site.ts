@@ -267,18 +267,22 @@ export const about = {
       role: "Tehnični soustanovitelj",
       focus: "Razvoj produkta in avtomatizacij",
       initials: "D",
+      photo: "/team/din.png",
     },
     {
       name: "Ažbe",
       role: "Tehnični soustanovitelj",
       focus: "Razvoj produkta in avtomatizacij",
       initials: "A",
+      // PLACEHOLDER: Ažbetova fotografija še ni na voljo — dodaj v public/team/azbe.png in vpiši pot sem.
+      photo: null,
     },
     {
       name: "Pero",
       role: "Vodja ekipe",
       focus: "Prodaja, trženje in odnosi s strankami",
       initials: "P",
+      photo: "/team/pero.png",
     },
   ],
   philosophy: {
