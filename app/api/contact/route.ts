@@ -5,6 +5,7 @@ import { NextResponse } from "next/server";
  *
  * TODO: tukaj priklopi pošiljanje e-pošte ali CRM —
  * npr. Resend (https://resend.com), EmailJS ali webhook v CRM.
+ * Ciljni naslov za povpraševanja je decernoai@gmail.com.
  * Podatki so validirani in na voljo v spremenljivki `data` spodaj.
  */
 export async function POST(request: Request) {

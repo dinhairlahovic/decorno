@@ -7,8 +7,7 @@
 export const site = {
   name: "Decerno",
   tagline: "AI avtomatizacije po meri za slovenska podjetja.",
-  // PLACEHOLDER: zamenjaj s pravim e-naslovom podjetja
-  email: "info@decerno.si",
+  email: "decernoai@gmail.com",
   // PLACEHOLDER: dodaj prave povezave do družbenih omrežij
   socials: [
     { label: "LinkedIn", href: "#" },
@@ -256,33 +255,39 @@ export const about = {
   eyebrow: "O nas",
   title: "Mlada ekipa, ki verjame, da AI ni samo za velike.",
   story: [
-    "Decerno smo ustanovili Din, Ažbe in Pero — trije devetnajstletniki iz Slovenije, ki smo odraščali z orodji, o katerih večina podjetij šele bere.",
+    "Decerno smo ustanovili Din, Ažbe in Peter — trije devetnajstletniki iz Slovenije, ki smo odraščali z orodji, o katerih večina podjetij šele bere.",
     "Videli smo, da praktične AI avtomatizacije dobivajo predvsem velika podjetja z velikimi proračuni. Lokalna restavracija, frizerski salon ali manjša agencija pa še naprej ročno potrjuje termine in prepisuje podatke med preglednicami.",
     "To želimo spremeniti. Smo zgodnja, majhna in izrazito \"hands-on\" ekipa — kar pomeni, da z vsako stranko delamo neposredno, brez posrednikov in brez korporativnega leporečja.",
   ],
   foundersTitle: "Ekipa",
+  teamIntro:
+    "Verjamemo, da prava avtomatizacija ljudi ne nadomesti — pomnoži njihov doseg pri delu. Enako velja znotraj naše ekipe.",
   founders: [
     {
       name: "Din",
       role: "Tehnični soustanovitelj",
-      focus: "Razvoj produkta in avtomatizacij",
+      focus: "Din vsako avtomatizacijo spelje od ideje do delujoče kode — brez dolgih usklajevanj in brez zamud.",
       initials: "D",
       photo: "/team/din.png",
+      linkedin: "https://www.linkedin.com/in/din-hairlahovic-7575753a8/",
     },
     {
       name: "Ažbe",
       role: "Tehnični soustanovitelj",
-      focus: "Razvoj produkta in avtomatizacij",
+      focus: "Ažbe poskrbi, da avtomatizacija zanesljivo teče tudi, ko se orodja in obseg podatkov spreminjajo.",
       initials: "A",
       // PLACEHOLDER: Ažbetova fotografija še ni na voljo — dodaj v public/team/azbe.png in vpiši pot sem.
       photo: null,
+      // Ažbe (še) nima javnega LinkedIn profila za povezavo.
+      linkedin: null,
     },
     {
-      name: "Pero",
+      name: "Peter",
       role: "Vodja ekipe",
-      focus: "Prodaja, trženje in odnosi s strankami",
+      focus: "Peter posluša, kako stranke dejansko delajo, in to takoj prevede v zahteve, ki jih ekipa lahko gradi.",
       initials: "P",
       photo: "/team/pero.png",
+      linkedin: "https://www.linkedin.com/in/peter-stražar-b78089365/",
     },
   ],
   philosophy: {

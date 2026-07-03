@@ -8,7 +8,7 @@ import { about } from "@/content/site";
 export const metadata: Metadata = {
   title: "O nas",
   description:
-    "Din, Ažbe in Pero — mlada slovenska ekipa, ki prinaša praktične AI avtomatizacije lokalnim podjetjem.",
+    "Din, Ažbe in Peter — mlada slovenska ekipa, ki prinaša praktične AI avtomatizacije lokalnim podjetjem.",
 };
 
 export default function AboutPage() {
@@ -35,6 +35,7 @@ export default function AboutPage() {
         <div className="mx-auto max-w-content px-5 py-20 sm:px-8 sm:py-28">
           <Reveal>
             <SectionHeading eyebrow={about.eyebrow} title={about.foundersTitle} dark />
+            <p className="mt-4 max-w-2xl text-base text-mutedark">{about.teamIntro}</p>
           </Reveal>
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {about.founders.map((founder, i) => (
