@@ -6,7 +6,7 @@
 function Robot({ delay }: { delay: number }) {
   return (
     <div
-      className="robot-anim absolute bottom-0 left-0"
+      className="robot-anim absolute bottom-0"
       style={{ animationDelay: `${delay}s` }}
     >
       {/* Antena */}
@@ -39,7 +39,7 @@ export default function RobotFactory() {
         }}
       />
 
-      {/* Pas z robotki — cqw enote merijo širino tega pasu */}
+      {/* Pas z robotki — animacija `left` v % meri širino tega pasu */}
       <div className="robot-lane absolute bottom-[3.8rem] left-[24%] right-[2%] z-10 h-16">
         <Robot delay={0} />
         <Robot delay={2.3} />

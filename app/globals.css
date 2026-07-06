@@ -89,35 +89,39 @@ h4 {
   animation: belt-move 0.9s linear infinite;
 }
 
-/* Robotki: pokukajo iz stroja, se peljejo po traku in padejo z njega */
-.robot-lane {
-  container-type: inline-size;
-}
-
+/* Robotki: pokukajo iz stroja, se peljejo po traku in padejo z njega.
+   Pot animiramo z `left` v odstotkih (ne s cqw enotami) — container-query
+   enote v @keyframes na iOS Safariju niso zanesljive, odstotki pa so. */
 @keyframes robot-run {
   0% {
-    transform: translateX(0) translateY(4px) scale(0.5);
+    left: 0%;
+    transform: translateY(4px) scale(0.5);
     opacity: 0;
   }
   10% {
-    transform: translateX(6cqw) translateY(0) scale(1);
+    left: 5%;
+    transform: translateY(0) scale(1);
     opacity: 1;
   }
   80% {
-    transform: translateX(78cqw) translateY(0) scale(1);
+    left: calc(92% - 3rem);
+    transform: translateY(0) scale(1);
     opacity: 1;
   }
   92% {
-    transform: translateX(86cqw) translateY(22px) rotate(16deg);
+    left: calc(98% - 3rem);
+    transform: translateY(22px) rotate(16deg);
     opacity: 1;
   }
   100% {
-    transform: translateX(89cqw) translateY(64px) rotate(28deg);
+    left: calc(100% - 3rem);
+    transform: translateY(64px) rotate(28deg);
     opacity: 0;
   }
 }
 
 .robot-anim {
+  left: 0;
   animation: robot-run 7s cubic-bezier(0.3, 0, 0.7, 1) infinite;
   opacity: 0;
 }
@@ -139,10 +143,12 @@ h4 {
   animation: machine-light 1.8s ease-in-out infinite;
 }
 
-/* Vsaka pika prepotuje svoj odsek v tretjini cikla — utrip potuje od vozlišča do vozlišča */
+/* Vsaka pika prepotuje svoj odsek v tretjini cikla — utrip potuje od
+   vozlišča do vozlišča. Pot animiramo z `left` v odstotkih (ne s cqw
+   enotami), ker container-query enote v @keyframes na Safariju odpovejo. */
 @keyframes connector-x {
   0% {
-    transform: translateX(0);
+    left: 0;
     opacity: 0;
   }
   4% {
@@ -152,17 +158,13 @@ h4 {
     opacity: 1;
   }
   33.3% {
-    transform: translateX(calc(100cqw - 6px));
+    left: calc(100% - 6px);
     opacity: 0;
   }
   100% {
-    transform: translateX(calc(100cqw - 6px));
+    left: calc(100% - 6px);
     opacity: 0;
   }
-}
-
-.connector {
-  container-type: inline-size;
 }
 
 .connector-dot {
@@ -183,7 +185,8 @@ h4 {
   .robot-anim {
     animation: none;
     opacity: 1;
-    transform: translateX(40cqw);
+    left: calc(50% - 1.5rem);
+    transform: none;
   }
   .robot-anim:not(:first-child) {
     display: none;
