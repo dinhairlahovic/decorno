@@ -181,20 +181,22 @@ h4 {
     animation: none;
     opacity: 0;
   }
-  /* Brez animacij: en robotek stoji na sredini traku, ostala dva sta skrita */
-  .robot-anim {
-    animation: none;
-    opacity: 1;
-    left: calc(50% - 1.5rem);
-    transform: none;
-  }
-  .robot-anim:not(:first-child) {
-    display: none;
-  }
   *,
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
+  }
+  /* Izjema: tovarna robotkov v heroju je majhna, zadržana dekoracija in
+     podpis znamke — teče tudi ob vklopljeni sistemski nastavitvi
+     "zmanjšaj gibanje" (sicer bi bil hero videti pokvarjen). */
+  .robot-anim {
+    animation-duration: 7s !important;
+  }
+  .belt-track {
+    animation-duration: 0.9s !important;
+  }
+  .machine-light {
+    animation-duration: 1.8s !important;
   }
 }
